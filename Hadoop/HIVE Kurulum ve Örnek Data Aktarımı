@@ -1,0 +1,58 @@
+Ilk olarak hive kurmak lazım hadoop üzerine.
+
+Onun için https://archive.apache.org/dist/hive/hive-0.12.0/ 78M  olanı indir
+
+Sonra onu aç
+ ->tar -zxvf hive-0.12.0.tar.gz 
+Sonra 
+-> cd   
+
+-> vi .bashrc
+
+          export JAVA_HOME=/home/beyhan/Downloads/jdk1.6.0_43
+          export HADOOP_HOME=/home/beyhan/Downloads/pat/
+          export HIVE_HOME=/home/beyhan/Downloads/hive-0.12.0
+          export PATH=$HOME/bin:$JAVA_HOME/bin:$PATH
+burayı düzenle.
+
+sonra
+->source .bashrc
+
+
+
+namenode-datanode aç.
+
+->cd /home/beyhan/Downloads/pat
+beyhan@beyhan:~/Downloads/pat$  -> bin/start-all.sh
+->jps
+
+
+http://localhost:50070
+
+->jps  //bak bakalım açılmış mı.
+
+
+-> cd Downloads/hive-0.12.0/
+
+->bin/hive
+
+hive-> olmuştur şimdi. // tablo oluşturup içine dışarıdan  veri atıyoruz.
+
+
+veri örneği
+
+beyhan,10
+turker,5
+...
+..
+ 
+
+
+->create table emp (ename string,esal int) row format delimited fields terminated by',' stored as textfile;
+
+->load data local inpath '/home/beyhan/Desktop/denemem' into table emp;(local to hive)
+
+//burda hive'e attık.
+localhost' a girerek ordan user>hive>warehouse>emp>denemem girince görüyorsun.
+
+->load data inpath '/empdetails' into table emp;(hdfs to hive)
